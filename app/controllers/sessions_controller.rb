@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     else
       flash[:danger] ='Failed..'
       render 'toppages/index'
+    end
   end
 
   def destroy

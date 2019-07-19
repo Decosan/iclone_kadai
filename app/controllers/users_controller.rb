@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_user_login, only:[:index,:show,:edit]
+  before_action :user_identify, only:[:show,:edit]
+
   def index
     @users = User.all.page(params[:page])
   end
@@ -30,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] ='Edit completed!'
-      redirect_to users_path(@user)
+      redirect_to user_path(@user)
     else
       flash.now[:danger] ='Failed..'
       render 'edit'
@@ -48,5 +51,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name,:email,:password,:password_confirmation,:image,:image_cache)
+  end
+
+  def user_identify
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to root_path
+    end
   end
 end
