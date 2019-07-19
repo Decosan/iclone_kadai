@@ -2,7 +2,12 @@
   <% posts.each do |post| %>
   	<li class="media">
   		<h4 class="media-left" style="color: blue;">
-  			<%= post.user.name %>
+        <% if post.user.id == current_user.id %>
+          <%= link_to 'Edit',edit_post_path(post.id),class:'btn btn-success btn-xs' %>
+          <%= link_to 'Dele',post_path(post.id),method: :delete,data: {confirm: 'Are you sure?'},class:'btn btn-danger btn-xs' %>
+        <% else %>
+  			   <%= post.user.name %>
+        <% end %>
   		</h4>
   		<div class="media-body">
   			<h4 class="media-heading"><%= post.title %></h4>
