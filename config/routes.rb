@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'toppages/index'
   get 'sessions/create'
   get 'sessions/destroy'
   get 'signup', to: 'users#new'
