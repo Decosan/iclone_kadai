@@ -10,7 +10,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [400, nil]
 
   version :thumb do
-    process :resize_to_limit => [150, nil]
+    process :resize_to_limit => [100, nil]
   end
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

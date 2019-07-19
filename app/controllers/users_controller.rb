@@ -8,6 +8,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @posts = current_user.posts.order('created_at DESC').page(params[:page])
+    count(current_user)
+  end
+
+  def like
+    @posts = User.all.page(params[:page])
+    count(current_user)
   end
 
   def new

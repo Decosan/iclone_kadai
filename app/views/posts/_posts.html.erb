@@ -13,13 +13,21 @@
   			<h4 class="media-heading"><%= post.title %></h4>
   			<%= post.content %>
   		</div>
+        <% unless post.user.id == current_user.id %>
+          <% if current_user.favorites.pluck('post_id').include?(post.id) %>
+            <%= link_to 'お気に入り解除',favorite_path(id: post.id),method: :delete,class:'btn btn-danger btn-md' %>
+          <% else %>
+            <%= link_to 'お気に入り登録',favorites_path(post_id: post.id),method: :post,class:'btn btn-success btn-md' %>
+          <% end %>
+        <% end %>
       <div>
         <% if post.image? %>
         <%= image_tag post.image.url %>
         <% else %>
         <p>No Image</p>
         <% end %>
- </div>
+      </div>
   	</li>
   <% end %>
+  <%= paginate posts %>
 </ul>
