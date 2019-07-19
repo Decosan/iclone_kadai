@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] ='Sign up!'
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       flash.now[:danger] ='Failed..'
       render 'new'

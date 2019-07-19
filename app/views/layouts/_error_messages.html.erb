@@ -1,4 +1,4 @@
-<% model.errors.any? %>
+<% if model.errors.any? %>
 <div class="error_explanation">
   <h4><%= model.errors.count %>件のエラーがあります</h4>
 </div>
