@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order('created_at DESC').page(params[:page])
   end
 
   def show
@@ -10,6 +9,14 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = current_user.posts.build(post_params)
+    if @post.save
+      flash[:success] ='Post it!'
+      redirect_to root_path
+    else
+      flash.now[:danger] ='Failed..'
+      render 'toppages/index'
+    end
   end
 
   def edit
@@ -19,5 +26,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title,:content,:image,:image_cache)
   end
 end

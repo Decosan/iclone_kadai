@@ -1,5 +1,29 @@
 <% if logged_in? %>
 <p>Login User: <%= current_user.name %></p>
+
+<%= form_with(model: @post,local: true)do |f| %>
+  <div class="post_group">
+    <%= f.label :title, 'title' %>
+    <%= f.text_field :title, class:'form-control' %>
+  </div>
+
+  <div class="post_group">
+    <%= f.label :content, 'content' %>
+    <%= f.text_area :content, class:'form-control',row:2 %>
+  </div>
+
+  <div class="post_group">
+    <%= f.label :image %>
+    <%= image_tag @post.image.url if @post.image? %>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+
+  <%= f.submit 'Create New Post', class:'btn btn-primary btn-md' %>
+<% end %>
+
+<%= render 'posts/posts', posts: @posts %>
+
 <% else %>
   <div class="jumbotron">
   	<h1>iclone</h1>
