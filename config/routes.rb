@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
 
   resources :favorites, only:[:create,:destroy]
-  resources :posts
+  resources :posts do
+    collection do
+      post :confirm
+    end
+  end
   resources :users do
     member do
       get :like

@@ -3,8 +3,9 @@
   	<li class="media">
   		<h4 class="media-left" style="color: blue;">
         <% if post.user.id == current_user.id %>
-          <%= link_to 'Edit',edit_post_path(post.id),class:'btn btn-success btn-xs' %>
-          <%= link_to 'Dele',post_path(post.id),method: :delete,data: {confirm: 'Are you sure?'},class:'btn btn-danger btn-xs' %>
+          <%= link_to 'Detail',post_path(post.id),class:'btn btn-info btn-xs' %>
+          <%= link_to 'Edit !!',edit_post_path(post.id),class:'btn btn-success btn-xs' %>
+          <%= link_to 'Delete',post_path(post.id),method: :delete,data: {confirm: 'Are you sure?'},class:'btn btn-danger btn-xs' %>
         <% else %>
   			   <%= post.user.name %>
         <% end %>

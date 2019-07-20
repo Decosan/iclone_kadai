@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -18,8 +19,7 @@ class PostsController < ApplicationController
       flash[:success] ='Post it!'
       redirect_to root_path
     else
-      flash.now[:danger] ='Failed..'
-      redirect_to root_path
+      redirect_to root_url, flash: {danger: "入力されていない項目があります"}
     end
   end
 

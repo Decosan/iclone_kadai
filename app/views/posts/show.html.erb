@@ -1,0 +1,11 @@
+<div class="jumbotron">
+		<h1>Title: <%= @post.title %></h1>
+		<p>Content: <%= @post.content %></p>
+		<div>
+      <% if @post.image? %>
+      	<%= image_tag @post.image.url %>
+    	<% else %>
+      	<p>No Image</p>
+    	<% end %>
+		</div>
+</div>
