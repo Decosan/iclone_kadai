@@ -11,17 +11,17 @@
           <p>No Image</p>
         <% end %>
     	</div>
-    	<div class="panel-body">
+    	<div class ="panel-body">
     		Name: <%= @user.name %>
     	</div>
-    	<div class="panel-footer">
+    	<div class ="panel-footer">
     		Email: <%= @user.email %>
     	</div>
     </div>
   </div>
-  <div class="col-md-8">
-    <ul class="nav nav-tabs">
-    	<li role="presentation" class ="<%= 'active' if current_page?(user_path(@user.id)) %>"><%= link_to user_path(@user.id) do %>My Posts<span class="badge"><%= @count_posts %></span><% end %></li>
+  <div class ="col-md-8">
+    <ul class ="nav nav-tabs">
+    	<li role ="presentation" class ="<%= 'active' if current_page?(user_path(@user.id)) %>"><%= link_to user_path(@user.id) do %>My Posts<span class="badge"><%= @count_posts %></span><% end %></li>
       <li role="presentation" class ="<%= 'active' if current_page?(like_user_path(@user.id)) %>"><%= link_to like_user_path(@user.id) do %>My Favs<span class="badge"><%= @count_favs %></span><% end %></li>
     </ul>
 
@@ -29,15 +29,22 @@
       <% @posts.each do |post| %>
       <% unless post.user.id == @user.id %>
           <% if current_user.favorites.pluck(:post_id).include?(post.id) %>
-          	<li class="media">
-          		<h4 class="media-left" style="color: blue;">
+          	<li class ="media">
+          		<h4 class ="media-left" style="color: blue;">
                     <%= post.user.name %>:
                     <%= link_to 'お気に入りを解除',favorite_path(id: post.id),method: :delete,class:'btn btn-danger btn-xs' %>
           		</h4>
-          		<div class="media-body">
-          			<h4 class="media-heading"><%= post.title %></h4>
+          		<div class ="media-body">
+          			<h4 class ="media-heading"><%= post.title %></h4>
           			<%= post.content %>
           		</div>
+              <div>
+                <% if post.image? %>
+                <%= image_tag post.image.url %>
+                <% else %>
+                <p>No Image</p>
+                <% end %>
+              </div>
           	</li>
           <% end %>
         <% end %>
