@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_user_login
-  before_action :post_identify, only:[:edit,:update,:destroy]
+  before_action :post_identify, only:[:show,:edit,:update,:destroy]
 
   def index
   end
@@ -10,6 +10,10 @@ class PostsController < ApplicationController
   end
 
   def new
+  end
+
+  def confirm
+    @post = Post.new(post_params)
   end
 
   def create

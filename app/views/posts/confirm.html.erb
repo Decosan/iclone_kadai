@@ -1,0 +1,19 @@
+<h3 style="color: red;">Are you OK?</h3>
+
+<%= form_with(model: @post ,url:root_path, local:true)do |f| %>
+  <%= f.hidden_field :title %>
+  <%= f.hidden_field :content %>
+  <%=f.hidden_field :image %>
+
+  <h4>Title :<%= @post.title %></h4>
+  <h5>Contetn :<%= @post.content %></h5>
+  <p>Image:<%= image_tag @post.image.url if @post.image? %></p>
+  <%= f.submit 'OK!' %>
+<% end %>
+
+<%= form_with(model:@post,url: root_path,local: true,method:'get')do |f| %>
+  <%= f.hidden_field :title %>
+  <%= f.hidden_field :content %>
+  <%= f.hidden_field :image_cache %>
+  <%= f.submit 'Back',name:"back" %>
+<% end %>
