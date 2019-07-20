@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   root to: 'toppages#index'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
