@@ -1,12 +1,13 @@
 class ToppagesController < ApplicationController
   def index
-    unless logged_in?
-    end
-    @posts = Post.all.order('created_at DESC').page(params[:page])
-    if params[:back]
-      @post = current_user.posts.build(post_params)
-    else
-      @post = current_user.posts.build
+    if logged_in?
+      if params[:back]
+        @posts = Post.all.order('created_at DESC').page(params[:page])
+        @post = current_user.posts.build(post_params)
+      else
+        @posts = Post.all.order('created_at DESC').page(params[:page])
+        @post = current_user.posts.build
+      end
     end
   end
 
