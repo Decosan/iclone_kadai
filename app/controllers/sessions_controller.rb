@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(user.id)
     else
       flash[:danger] ='Failed..'
-      render 'toppages/index'
+      render 'posts/index'
     end
   end
 

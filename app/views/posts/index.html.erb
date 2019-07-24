@@ -2,6 +2,7 @@
 <h2 style='color: blue;'>Login User: <%= current_user.name %></h2>
 
 <%= form_with(model: @post,url: confirm_posts_path,local: true)do |f| %>
+<%= render 'layouts/error_messages', model: f.object %>
 
   <div class="post_group">
     <%= f.label :title, 'title' %>
@@ -23,7 +24,7 @@
   <%= f.submit 'Create New Post', class:'btn btn-primary btn-md' %>
 <% end %>
 
-<%= render 'posts/posts', posts: @posts %>
+<%= render 'posts', posts: @posts %>
 
 <% else %>
   <div class="jumbotron">
