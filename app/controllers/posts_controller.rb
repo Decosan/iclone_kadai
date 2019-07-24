@@ -3,6 +3,10 @@ class PostsController < ApplicationController
   before_action :post_identify, only:[:show,:edit,:update,:destroy]
 
   def index
+    if logged_in?
+      @posts = Post.all.order('created_at DESC').page(params[:page])
+      @post = current_user.posts.build
+    end
   end
 
   def show
@@ -14,6 +18,8 @@ class PostsController < ApplicationController
 
   def confirm
     @post = Post.new(post_params)
+    # @posts = Post.all.order('created_at DESC')
+    render "index" if @post.invalid?
   end
 
   def create
@@ -23,7 +29,7 @@ class PostsController < ApplicationController
       flash[:success] ='Post it!'
       redirect_to root_path
     else
-      redirect_to root_url, flash: {danger: "入力されていない項目があります"}
+      redirect_to root_path
     end
   end
 
